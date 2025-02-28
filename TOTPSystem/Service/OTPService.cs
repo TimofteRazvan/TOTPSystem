@@ -5,7 +5,7 @@ namespace OTPSystem.Service
 {
     public class OTPService : IOTPService
     {
-        private readonly TimeSpan _otpDuration = TimeSpan.FromSeconds(5);
+        private readonly TimeSpan _otpDuration = TimeSpan.FromSeconds(10);
         private readonly Dictionary<string, OTPResponse> _otpCache = new Dictionary<string, OTPResponse>();
 
         /// <summary>
@@ -29,11 +29,6 @@ namespace OTPSystem.Service
         /// <returns>True if the OTP is valid; otherwise, false.</returns>
         public bool ValidateOTP(string sessionID, string otp)
         {
-            if (string.IsNullOrWhiteSpace(otp))
-            {
-                return false;
-            }
-
             if (!_otpCache.TryGetValue(sessionID, out OTPResponse? otpResponse) || otpResponse == null)
             {
                 return false;
