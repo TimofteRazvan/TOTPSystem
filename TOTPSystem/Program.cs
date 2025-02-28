@@ -1,2 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using TOTPSystem.Util;
+class Program
+{
+    static void Main()
+    {
+        string otp = OneTimePasswordGenerator.GenerateOTP();
+        Console.WriteLine($"Generated OTP: {otp}");
+    }
+}
