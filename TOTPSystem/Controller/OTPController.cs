@@ -22,12 +22,10 @@ namespace TOTPSystem.Controller
         /// <returns>An OTP response that contains both the OTP and its expiration time.</returns>
         // TODO: Change lifetime to last longer after finished!
         [HttpGet("generate")]
-        public IActionResult GenerateOTP([FromQuery] string sessionID)
+        public IActionResult GenerateOTP()
         {
-            if (string.IsNullOrWhiteSpace(sessionID))
-            {
-                return BadRequest("Bad session. ID cannot be empty.");
-            }
+            var sessionID = Guid.NewGuid().ToString();
+            HttpContext.Session.SetString("SessionID", sessionID);
 
             var otpResponse = _otpService.GenerateOTPResponse(sessionID);
             return Ok(otpResponse);
@@ -41,16 +39,24 @@ namespace TOTPSystem.Controller
         [HttpPost("validate")]
         public IActionResult ValidateOTP([FromBody] OTPRequest request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.SessionID) || string.IsNullOrWhiteSpace(request.OTP))
+            var sessionID = HttpContext.Session.GetString("SessionID");
+
+            if (string.IsNullOrEmpty(sessionID))
             {
-                return BadRequest("Bad data. Session ID and OTP are required.");
+                return BadRequest("No active session found.");
             }
 
-            bool isValid = _otpService.ValidateOTP(request.SessionID, request.OTP);
+            if (request == null || string.IsNullOrEmpty(request.OTP))
+            {
+                return BadRequest("OTP is required.");
+            }
+
+            bool isValid = _otpService.ValidateOTP(sessionID, request.OTP);
             if (!isValid)
             {
                 return BadRequest("OTP is invalid or expired.");
             }
+
             return Ok("OTP is valid.");
         }
     }
