@@ -43,21 +43,21 @@ namespace TOTPSystem.Controller
 
             if (string.IsNullOrEmpty(sessionID))
             {
-                return BadRequest("No active session found.");
+                return BadRequest(new { error = "No active session found." });
             }
 
             if (request == null || string.IsNullOrEmpty(request.OTP))
             {
-                return BadRequest("OTP is required.");
+                return BadRequest(new { error = "OTP is required." });
             }
 
             bool isValid = _otpService.ValidateOTP(sessionID, request.OTP);
             if (!isValid)
             {
-                return BadRequest("OTP is invalid or expired.");
+                return BadRequest(new { error = "OTP is invalid or expired." });
             }
 
-            return Ok("OTP is valid.");
+            return Ok(new { message = "OTP is valid." });
         }
     }
 }
