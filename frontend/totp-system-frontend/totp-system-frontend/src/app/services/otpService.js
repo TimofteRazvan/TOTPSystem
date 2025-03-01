@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://localhost:8000/api/OTP";
+const BACKEND_URL = "https://localhost:8080/api/OTP";
 
 /**
  * Generates a new OTP by sending a request to the backend. The OTP will be returned along with its lifetime.
