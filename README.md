@@ -1,6 +1,7 @@
 # TOTPSystem
 
-![](https://github.com/TimofteRazvan/TOTPSystem/blob/master/main.PNG)
+![](https://github.com/TimofteRazvan/TOTPSystem/blob/master/final.gif)
+(ignore the pixels, gif conversion consequences)
 <h2>Instructions for running locally</h2>
 Clone the project
 
