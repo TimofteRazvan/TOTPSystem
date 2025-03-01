@@ -7,7 +7,9 @@ const BACKEND_URL = "http://localhost:8000/api/OTP";
  * @throws {Error} - If the generate request fails or the server gives back an error.
  */
 export const generateOTP = async () => {
-  const response = await fetch(`${BACKEND_URL}/generate`, {});
+  const response = await fetch(`${BACKEND_URL}/generate`, {
+    credentials: "include",
+  });
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error || "Failed to generate OTP");
@@ -28,6 +30,7 @@ export const validateOTP = async (otp) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify({ otp }),
   });
   if (!response.ok) {
