@@ -5,12 +5,10 @@
     /// </summary>
     public class OTPRequest
     {
-        public string SessionID { get; set; }
         public string OTP { get; set; }
 
-        public OTPRequest(string sessionID, string otp)
+        public OTPRequest(string otp)
         {
-            SessionID = sessionID;
             OTP = otp;
         }
     }
