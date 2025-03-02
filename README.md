@@ -11,7 +11,7 @@ git clone https://github.com/TimofteRazvan/TOTPSystem.git
 
 Open the backend solution (TOTPSystem.sln) in Visual Studio and run it
 
-Open the frontend server (frontend/totp-system-frontend/totp-system-frontend) from VS
+Open the frontend server (frontend/totp-system-frontend/totp-system-frontend) from VS(code)
 
 Install NextJS so that you can run the frontend
 
